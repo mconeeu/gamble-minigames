@@ -15,4 +15,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>traffic-race</artifactId>
+
+    <repositories>
+        <repository>
+            <id>mcone-systems</id>
+            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
+        </repository>
+    </repositories>
 </project>
