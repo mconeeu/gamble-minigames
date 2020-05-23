@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2017 - 2020 Felix Schmid, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
 package eu.mcone.gamble.trafficrace.listener;
 
 import eu.mcone.gamble.api.EndReason;
@@ -25,17 +30,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Datei erstellt von: Felix Schmid in Projekt: eu.mcone-gamble-minigames
- */
 public class MoveListener extends GambleListener {
 
-    private Gamble gamble;
-    private TrafficRaceGame game;
+    private final Gamble gamble;
+    private final TrafficRaceGame game;
 
     private String direction;
     private int coordinate;
-    private Map<Player, Long> lastPushed;
+    private final Map<Player, Long> lastPushed;
 
     int neededPlayers = 1;
 
@@ -45,7 +47,7 @@ public class MoveListener extends GambleListener {
         super(gamble, gambleGame);
         this.gamble = gamble;
         this.game = (TrafficRaceGame) gambleGame;
-        this.lastPushed = new HashMap<Player, Long>();
+        this.lastPushed = new HashMap<>();
 
         init();
     }
@@ -81,12 +83,7 @@ public class MoveListener extends GambleListener {
                 results[placement - 1] = new GambleGameResult(gp, placement, 6);
                 placement++;
             }
-            Bukkit.getScheduler().scheduleSyncDelayedTask(game, new Runnable() {
-                @Override
-                public void run() {
-                    gamble.finishGambleGame(GambleGameType.TRAFFIC_RACE, EndReason.ENDED, results);
-                }
-            }, 5 * 20);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(game, () -> gamble.finishGambleGame(GambleGameType.TRAFFIC_RACE, EndReason.ENDED, results), 5 * 20);
 
         }
     }

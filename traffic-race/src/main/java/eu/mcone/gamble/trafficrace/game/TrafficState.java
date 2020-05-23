@@ -1,10 +1,12 @@
+/*
+ * Copyright (c) 2017 - 2020 Felix Schmid, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
 package eu.mcone.gamble.trafficrace.game;
 
 import lombok.Getter;
 
-/**
- * Datei erstellt von: Felix Schmid in Projekt: eu.mcone-gamble-minigames
- */
 public enum TrafficState {
 
     GO(2, 4),
@@ -12,7 +14,7 @@ public enum TrafficState {
     STOP(1, 2);
 
     @Getter
-    private int minLength, maxLength;
+    private final int minLength, maxLength;
 
     TrafficState(int minLength, int maxLength) {
         this.minLength = minLength;

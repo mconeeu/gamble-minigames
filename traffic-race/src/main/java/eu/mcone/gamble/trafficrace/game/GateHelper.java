@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2017 - 2020 Felix Schmid, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
 package eu.mcone.gamble.trafficrace.game;
 
 import eu.mcone.gamble.api.EndReason;
@@ -12,17 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Datei erstellt von: Felix Schmid in Projekt: eu.mcone-gamble-minigames
- */
 public class GateHelper {
 
-    private TrafficRaceGame game;
-    private Map<Location, Material> materials;
+    private final TrafficRaceGame game;
+    private final Map<Location, Material> materials;
 
     public GateHelper(TrafficRaceGame game) {
         this.game = game;
-        materials = new HashMap<Location, Material>();
+        materials = new HashMap<>();
     }
 
     public void remove() {

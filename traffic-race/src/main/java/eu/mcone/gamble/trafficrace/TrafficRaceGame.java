@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2017 - 2020 Felix Schmid, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
 package eu.mcone.gamble.trafficrace;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
@@ -27,9 +32,6 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Datei erstellt von: Felix Schmid in Projekt: eu.mcone-gamble-minigames
- */
 @Getter
 public class TrafficRaceGame extends GambleGame {
 
@@ -56,8 +58,8 @@ public class TrafficRaceGame extends GambleGame {
         minigameWorld = CoreSystem.getInstance().getWorldManager().getWorld("minigames");
         trafficState = TrafficState.GO;
         gateHelper = new GateHelper(this);
-        playersInGoal = new LinkedList<GamblePlayer>();
-        phaseTime = new HashMap<TrafficState, Integer>();
+        playersInGoal = new LinkedList<>();
+        phaseTime = new HashMap<>();
         stateChangerTaskId = -1;
 
         GO = CoreSystem.getInstance().createTitle().title("§aLos!").subTitle("").stay(3).fadeIn(1).fadeOut(1);
@@ -122,26 +124,23 @@ public class TrafficRaceGame extends GambleGame {
         final int[] time = {0};
         generateRandomTimes();
 
-        stateChangerTaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-                if (time[0] >= phaseTime.get(trafficState)) {
-                    switch (trafficState) {
-                        case GO:
-                            changeTrafficState(TrafficState.ATTENTION);
-                            break;
-                        case ATTENTION:
-                            changeTrafficState(TrafficState.STOP);
-                            break;
-                        case STOP:
-                            generateRandomTimes();
-                            changeTrafficState(TrafficState.GO);
-                            break;
-                    }
-                    time[0] = 0;
+        stateChangerTaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            if (time[0] >= phaseTime.get(trafficState)) {
+                switch (trafficState) {
+                    case GO:
+                        changeTrafficState(TrafficState.ATTENTION);
+                        break;
+                    case ATTENTION:
+                        changeTrafficState(TrafficState.STOP);
+                        break;
+                    case STOP:
+                        generateRandomTimes();
+                        changeTrafficState(TrafficState.GO);
+                        break;
                 }
-                time[0]++;
+                time[0] = 0;
             }
+            time[0]++;
         }, 20, 20);
 
         if (Gamble.DEBUG) gamePlugin.sendConsoleMessage("TrafficRace: Started StateChangerTask");
