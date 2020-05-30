@@ -11,20 +11,18 @@
 
     <groupId>eu.mcone.gamble</groupId>
     <artifactId>mcone-gamble-minigames</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>traffic-race</module>
     </modules>
 
-    <packaging>pom</packaging>
-
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
-        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <developers>
@@ -39,7 +37,6 @@
             </roles>
             <timezone>Europe/Berlin</timezone>
         </developer>
-
         <developer>
             <id>dominklippl</id>
             <name>Dominik Lippl</name>
@@ -58,50 +55,6 @@
         <name>MC ONE</name>
         <url>https://www.eu.mcone.eu</url>
     </organization>
-
-    <build>
-        <finalName>${project.name}-${project.name}-${project.version}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <shadedArtifactAttached>false</shadedArtifactAttached>
-                </configuration>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
-
-    <distributionManagement>
-        <repository>
-            <id>mcone-systems</id>
-            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
