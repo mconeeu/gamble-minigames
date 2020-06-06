@@ -1,0 +1,4 @@
+name: gamble-tntrun
+version: 1.0.0
+main: eu.mcone.gamble.survivalgames.SurvivalGames
+authors: [Dominik]

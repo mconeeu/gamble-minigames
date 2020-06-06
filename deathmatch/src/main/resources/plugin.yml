@@ -1,0 +1,4 @@
+name: Deathmatch
+version: 1.0.0
+main: eu.mcone.gamble.deathmatch.Deathmatch
+authors: [Dominik]

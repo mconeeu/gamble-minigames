@@ -1,0 +1,4 @@
+name: HorseRace
+version: 1.0.0
+main: eu.mcone.gamble.horserace.HorseRace
+authors: [Dominik]

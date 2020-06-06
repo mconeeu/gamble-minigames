@@ -1,0 +1,4 @@
+name: GunGame
+version: 1.0.0
+main: eu.mcone.gamble.gungame.GunGame
+authors: [Dominik]

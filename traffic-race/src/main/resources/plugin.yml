@@ -1,4 +1,4 @@
 name: gamble-trafficrace
-version: 1.0.0.1
+version: 1.1.0
 main: eu.mcone.gamble.trafficrace.TrafficRaceGame
-authors: [Schmiddinger]
+authors: [Dominik, Schmiddinger]

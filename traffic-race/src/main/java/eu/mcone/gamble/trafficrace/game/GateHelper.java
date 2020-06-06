@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2017 - 2020 Felix Schmid, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2020 Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.gamble.trafficrace.game;
 
-import eu.mcone.gamble.api.EndReason;
-import eu.mcone.gamble.api.minigame.GambleGameType;
+import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.trafficrace.TrafficRaceGame;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,7 +27,7 @@ public class GateHelper {
     }
 
     public void remove() {
-        for(Block b : getBlocksBetween()) {
+        for (Block b : getBlocksBetween()) {
             materials.put(b.getLocation(), b.getType());
             b.setType(Material.AIR);
             System.out.println(b.getLocation().toString());
@@ -36,7 +35,7 @@ public class GateHelper {
     }
 
     public void recreate() {
-        for(Map.Entry<Location, Material> entry : materials.entrySet()) {
+        for (Map.Entry<Location, Material> entry : materials.entrySet()) {
             entry.getKey().getBlock().setType(entry.getValue());
         }
     }
@@ -47,7 +46,7 @@ public class GateHelper {
         Location end = game.getMinigameWorld().getBlockLocation("trafficrace_gate2");
 
         if (start == null || end == null) {
-            game.getGamble().finishGambleGame(GambleGameType.TRAFFIC_RACE, EndReason.EXCEPTION);
+            TrafficRaceGame.getInstance().getGameHandler().finishGame(EndReason.EXCEPTION);
             return blocks;
         }
 

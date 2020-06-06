@@ -1,0 +1,4 @@
+name: BoatWars
+version: 1.0.0
+main: eu.mcone.gamble.boatwars.BoatWars
+authors: [Dominik]
