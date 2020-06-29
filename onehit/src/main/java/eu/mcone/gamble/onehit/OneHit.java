@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gamble.api.minigame.GambleGame;
 import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.onehit.handler.GameHandler;
+import eu.mcone.gamble.onehit.listener.GeneralPlayerListener;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -36,6 +37,9 @@ public class OneHit extends GambleGame {
 
         sendConsoleMessage("Initialising onehit minigame...");
         minigameWorld = CoreSystem.getInstance().getWorldManager().getWorld("onehit");
+
+        registerListener(new GeneralPlayerListener());
+
         alivedPlayers = new ArrayList<>();
         playersInGoal = new LinkedList<>();
     }

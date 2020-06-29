@@ -1,6 +1,8 @@
 package eu.mcone.gamble.onehit.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.gamble.api.minigame.EndReason;
+import eu.mcone.gamble.api.minigame.GameResult;
 import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.onehit.OneHit;
 import eu.mcone.gamble.onehit.game.HotbarItems;
@@ -21,6 +23,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.util.Vector;
+
+import java.util.Iterator;
 
 public class GeneralPlayerListener implements Listener {
 
@@ -73,6 +77,18 @@ public class GeneralPlayerListener implements Listener {
 
                         OneHit.getInstance().getPlayersInGoal().add((GamblePlayer) k);
                         OneHit.getInstance().getMessenger().broadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!");
+
+                            GameResult[] results = new GameResult[1];
+                            Iterator<GamblePlayer> players = OneHit.getInstance().getPlayersInGoal().iterator();
+                            int placement = 1;
+                            while (players.hasNext()) {
+                                GamblePlayer gp = players.next();
+                                results[placement - 1] = new GameResult(gp, placement, 6);
+                                placement++;
+                            }
+
+                            OneHit.getInstance().getGameHandler().finishGame(EndReason.ENDED, results);
+
 
                         return;
                     }
