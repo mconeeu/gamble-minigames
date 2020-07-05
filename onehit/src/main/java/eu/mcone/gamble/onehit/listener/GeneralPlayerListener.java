@@ -94,7 +94,7 @@ public class GeneralPlayerListener implements Listener {
                     }
                 }
 
-                    OneHit.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
+                    OneHit.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet");
                     OneHit.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
                 }
         } else {
