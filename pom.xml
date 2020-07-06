@@ -23,6 +23,7 @@
         <module>boatwars</module>
         <module>deathmatch</module>
         <module>survivalgames</module>
+        <module>race</module>
     </modules>
 
     <properties>
@@ -42,6 +43,19 @@
             <roles>
                 <role>administrator</role>
                 <role>developer</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+        <developer>
+            <id>marvinhuelsmann</id>
+            <name>Marvin Huelsmann</name>
+            <url>https://marvhuelsmann.de</url>
+            <organization>MC ONE</organization>
+            <organizationUrl>https://www.mcone.eu</organizationUrl>
+            <roles>
+                <role>administrator</role>
+                <role>developer</role>
+                <role>builder</role>
             </roles>
             <timezone>Europe/Berlin</timezone>
         </developer>
