@@ -13,6 +13,7 @@ import eu.mcone.gamble.onehit.game.HotbarItems;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
 
@@ -47,6 +48,13 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
                                 for (GamblePlayer all : Gamble.getInstance().getGamblePlayers()) {
                                     OneHit.getInstance().getAlivedPlayers().add((Player) all);
                                     OneHit.getInstance().getMessenger().broadcast("§fDas Spiel beginnt...");
+
+                                    Bukkit.getScheduler().runTaskLater(OneHit.getInstance(), () -> {
+                                        if (OneHit.getInstance().getAlivedPlayers().size() != 1) {
+                                            ((Player) all).getVelocity().setY(0.6).multiply(0.4);
+                                            OneHit.getInstance().getMessenger().broadcast("§fAlle Spieler wurden in die Luft geschossen!");
+                                        }
+                                    }, 100);
                                 }
                             }, 20);
                         }, 20);
