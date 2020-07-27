@@ -33,7 +33,6 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
                 break;
             case INGAME:
                 Bukkit.getOnlinePlayers().forEach(x -> {
-                    x.teleport(OneHit.getInstance().getMinigameWorld().getLocation("onehit_spawn"));
                     x.getInventory().clear();
                     x.getInventory().setItem(0, HotbarItems.IRON_SWORD);
                 });
