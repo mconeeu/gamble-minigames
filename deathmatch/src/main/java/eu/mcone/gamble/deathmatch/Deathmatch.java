@@ -31,7 +31,7 @@ public class Deathmatch extends GambleGame {
 
     public Deathmatch() {
         super("Deathmatch", ChatColor.DARK_RED, "deathmatch.prefix");
-        setGameHandler(new eu.mcone.gamble.Deathmatch.handler.GameHandler());
+        setGameHandler(new eu.mcone.gamble.deathmatch.handler.GameHandler());
 
         minigameWorld = CoreSystem.getInstance().getWorldManager().getWorld("onehit");
 

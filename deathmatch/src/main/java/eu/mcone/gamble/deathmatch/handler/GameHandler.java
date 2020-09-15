@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.gamble.Deathmatch.handler;
+package eu.mcone.gamble.deathmatch.handler;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.gamble.api.Gamble;

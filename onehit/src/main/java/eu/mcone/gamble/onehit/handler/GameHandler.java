@@ -10,10 +10,8 @@ import eu.mcone.gamble.api.minigame.GamePhase;
 import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.onehit.OneHit;
 import eu.mcone.gamble.onehit.game.HotbarItems;
-import eu.mcone.gameapi.api.player.GamePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
 

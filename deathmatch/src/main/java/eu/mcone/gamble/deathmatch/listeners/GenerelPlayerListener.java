@@ -1,12 +1,9 @@
 package eu.mcone.gamble.deathmatch.listeners;
 
 import eu.mcone.gamble.api.minigame.EndReason;
-import eu.mcone.gamble.api.minigame.GambleGame;
 import eu.mcone.gamble.api.minigame.GameResult;
 import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.deathmatch.Deathmatch;
-import eu.mcone.gamble.deathmatch.game.HotbarItems;
-import eu.mcone.gameapi.api.GameAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,8 +13,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.Iterator;
@@ -75,7 +70,6 @@ public class GenerelPlayerListener implements Listener {
                         Deathmatch.getInstance().getAlivedPlayers().remove(k);
 
                         Deathmatch.getInstance().getPlayersInGoal().add((GamblePlayer) k);
-                        Deathmatch.getInstance().getMessenger().broadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!");
 
                         GameResult[] results = new GameResult[1];
                         Iterator<GamblePlayer> players = Deathmatch.getInstance().getPlayersInGoal().iterator();
