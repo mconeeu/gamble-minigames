@@ -25,7 +25,7 @@ public class GunGame extends GambleGame {
     @Getter
     private final CoreWorld minigameworld;
     @Getter
-    private final Map<Integer, GungameLevel> gungameLevels = new HashMap<>();
+    private Map<Integer, GungameLevel> gungameLevels = new HashMap<>();
 
 
     public GunGame() {

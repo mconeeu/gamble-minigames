@@ -51,6 +51,21 @@ public class SetupCommand extends CorePlayerCommand {
                 } else {
                     CoreSystem.getInstance().getMessenger().sendTransl(player, "system.command.noiteminhand");
                 }
+            } else if (args.length == 2 && args[0].equalsIgnoreCase("unbreakable")) {
+                if (player.getItemInHand() != null) {
+                    ItemStack playerHand = player.getItemInHand().clone();
+                    if (args[1].equalsIgnoreCase("true")) {
+                        ItemStack item = ItemBuilder.wrap(playerHand).unbreakable(true).create();
+                        player.setItemInHand(item);
+                        CoreSystem.getInstance().getMessenger().sendTransl(player, "setup.gamble.gungame.commands.setup.unbreakable.unbreakable");
+                    } else if (args[0].equalsIgnoreCase("false")) {
+                        ItemStack item = ItemBuilder.wrap(playerHand).unbreakable(true).create();
+                        player.setItemInHand(item);
+                        CoreSystem.getInstance().getMessenger().sendTransl(player, "setup.gamble.gungame.commands.setup.unbreakable.breakable");
+                    }
+                } else {
+                    CoreSystem.getInstance().getMessenger().sendTransl(player, "system.command.noiteminhand");
+                }
             } else {
                 CoreSystem.getInstance().getMessenger().sendTransl(player, "system.command.wronguse");
             }
