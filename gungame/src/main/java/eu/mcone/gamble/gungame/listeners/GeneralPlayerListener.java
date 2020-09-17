@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -24,15 +25,27 @@ public class GeneralPlayerListener implements Listener {
     public static Map<Player, Player> damagers = new HashMap<>();
 
     @EventHandler
+    public void on(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+
+        GunGame.getInstance().getAlivedPlayers().remove(p);
+    }
+
+
+    @EventHandler
     public void onEntityDeathEvent(EntityDeathEvent event) {
         EntityDamageEvent.DamageCause damageCause = event.getEntity().getLastDamageCause().getCause();
         if (event.getEntity() instanceof Player && event.getEntity().getKiller() instanceof Player) {
             Player victim = (Player) event.getEntity();
             Player killer = victim.getKiller();
-            handleDeath(victim, killer);
+            if (GunGame.getInstance().getAlivedPlayers().contains(victim) && GunGame.getInstance().getAlivedPlayers().contains(killer)) {
+                handleDeath(victim, killer);
+            }
         } else if (event.getEntity() instanceof Player && damageCause == EntityDamageEvent.DamageCause.VOID) {
             Player killer = damagers.get(event.getEntity());
-            handleDeath((Player) event.getEntity(), killer);
+            if (GunGame.getInstance().getAlivedPlayers().contains((Player) event.getEntity()) && GunGame.getInstance().getAlivedPlayers().contains(killer)) {
+                handleDeath((Player) event.getEntity(), killer);
+            }
         }
     }
 
