@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.gungame.GunGame;
 import eu.mcone.gamble.gungame.game.GungameLevel;
+import eu.mcone.gamble.gungame.handler.GameHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public class GeneralPlayerListener implements Listener {
             }
         } else if (event.getEntity() instanceof Player && damageCause == EntityDamageEvent.DamageCause.VOID) {
             Player killer = damagers.get(event.getEntity());
-            if (GunGame.getInstance().getAlivedPlayers().contains((Player) event.getEntity()) && GunGame.getInstance().getAlivedPlayers().contains(killer)) {
+            if (GunGame.getInstance().getAlivedPlayers().contains(event.getEntity()) && GunGame.getInstance().getAlivedPlayers().contains(killer)) {
                 handleDeath((Player) event.getEntity(), killer);
             }
         }
@@ -80,16 +81,18 @@ public class GeneralPlayerListener implements Listener {
 
     @EventHandler
     public void on(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player) {
-            Arrow arrow = (Arrow) event.getDamager();
-            if (arrow.getShooter() instanceof Player) {
-                Player shooter = (Player) arrow.getShooter();
-                GunGame.getInstance().getGameHandler().finishGame(EndReason.ENDED);
+        if (GameHandler.hasStarted) {
+            if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player) {
+                Arrow arrow = (Arrow) event.getDamager();
+                if (arrow.getShooter() instanceof Player) {
+                    Player shooter = (Player) arrow.getShooter();
+                    GunGame.getInstance().getGameHandler().finishGame(EndReason.ENDED);
+                }
             }
         }
     }
 
-    public void setItemsLevel(Player target, GungameLevel level) {
+    public static void setItemsLevel(Player target, GungameLevel level) {
         Map<Integer, ItemStack> test = level.calculateItems();
         target.getInventory().clear();
         for (Map.Entry<Integer, ItemStack> item : test.entrySet()) {

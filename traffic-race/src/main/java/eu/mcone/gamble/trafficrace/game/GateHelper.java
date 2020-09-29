@@ -5,6 +5,7 @@
 
 package eu.mcone.gamble.trafficrace.game;
 
+import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.trafficrace.TrafficRaceGame;
 import org.bukkit.Location;
@@ -42,8 +43,8 @@ public class GateHelper {
 
     private List<Block> getBlocksBetween() {
         List<Block> blocks = new ArrayList<>();
-        Location start = game.getMinigameWorld().getBlockLocation("trafficrace_gate1");
-        Location end = game.getMinigameWorld().getBlockLocation("trafficrace_gate2");
+        Location start = Gamble.getInstance().getMinigameWorld().getBlockLocation("trafficrace_gate1");
+        Location end = Gamble.getInstance().getMinigameWorld().getBlockLocation("trafficrace_gate2");
 
         if (start == null || end == null) {
             TrafficRaceGame.getInstance().getGameHandler().finishGame(EndReason.EXCEPTION);

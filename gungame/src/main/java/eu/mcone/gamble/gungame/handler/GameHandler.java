@@ -5,29 +5,21 @@
 
 package eu.mcone.gamble.gungame.handler;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
-import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.GamePhase;
-import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.gungame.GunGame;
+import eu.mcone.gamble.gungame.listeners.GeneralPlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
 
-    private static final Map<Location, Long> SPAWN_LOCATIONS = new HashMap<>();
-
-    static {
-        for (Map.Entry<String, CoreLocation> location : CoreSystem.getInstance().getWorldManager().getWorld(GunGame.getInstance().getMinigameworld().bukkit()).getLocations().entrySet()) {
-            if (location.getKey().startsWith("Gungame-")) {
-                SPAWN_LOCATIONS.put(location.getValue().bukkit(), (System.currentTimeMillis() / 1000) - 5);
-            }
-        }
-    }
+    public static boolean hasStarted = false;
 
     @Override
     public void gamePhaseSwitched(GamePhase gamePhase) {
@@ -49,25 +41,12 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
             case INGAME:
                 Bukkit.getOnlinePlayers().forEach(x -> {
                     x.getInventory().clear();
+                    x.getPlayer().teleport(getRandomSpawn());
+                    x.getPlayer().setGameMode(GameMode.ADVENTURE);
+                    GunGame.getInstance().getAlivedPlayers().add(x.getPlayer());
+                    GeneralPlayerListener.setItemsLevel(x, GunGame.getInstance().getGungameLevels().get(0));
                 });
-                GunGame.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 4 Sekunden!");
-                Bukkit.getScheduler().runTaskLater(GunGame.getInstance(), () -> {
-                    GunGame.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 3 Sekunden!");
-                    Bukkit.getScheduler().runTaskLater(GunGame.getInstance(), () -> {
-                        GunGame.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 2 Sekunden!");
-                        Bukkit.getScheduler().runTaskLater(GunGame.getInstance(), () -> {
-                            GunGame.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in einer Sekunden!");
-                            Bukkit.getScheduler().runTaskLater(GunGame.getInstance(), () -> {
-                                GunGame.getInstance().getMessenger().broadcast("§fDas Spiel hat begonnen!");
-                                for (GamblePlayer all : Gamble.getInstance().getGamblePlayers()) {
-                                    all.getPlayer().teleport(getRandomSpawn());
-                                    all.getPlayer().setGameMode(GameMode.ADVENTURE);
-                                }
-                            }, 20);
-                        }, 20);
-                    }, 20);
-                }, 20);
-
+                hasStarted = true;
                 break;
             case END:
                 break;
@@ -77,14 +56,14 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
     public Location getRandomSpawn() {
         List<Location> locations = new ArrayList<>();
 
-        for (Map.Entry<Location, Long> location : SPAWN_LOCATIONS.entrySet()) {
+        for (Map.Entry<Location, Long> location : GunGame.getInstance().getSpawnLocations().entrySet()) {
             if (((System.currentTimeMillis() / 1000) - location.getValue()) > 3) {
                 locations.add(location.getKey());
             }
         }
 
         Location location = locations.get(new Random().nextInt(locations.size() - 1));
-        SPAWN_LOCATIONS.put(location, System.currentTimeMillis() / 1000);
+        GunGame.getInstance().getSpawnLocations().put(location, System.currentTimeMillis() / 1000);
 
         return location;
     }

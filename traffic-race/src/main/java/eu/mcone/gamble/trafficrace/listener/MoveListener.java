@@ -40,8 +40,8 @@ public class MoveListener implements Listener {
     }
 
     private void init() {
-        Location x = TrafficRaceGame.getInstance().getMinigameWorld().getBlockLocation("trafficrace_goal_x");
-        Location z = TrafficRaceGame.getInstance().getMinigameWorld().getBlockLocation("trafficrace_goal_z");
+        Location x = Gamble.getInstance().getMinigameWorld().getBlockLocation("trafficrace_goal_x");
+        Location z = Gamble.getInstance().getMinigameWorld().getBlockLocation("trafficrace_goal_z");
         if (x != null) {
             direction = "x";
             coordinate = x.getBlockX();
@@ -87,7 +87,7 @@ public class MoveListener implements Listener {
             if ((movedFrom.getX() != movedTo.getX()) || (movedFrom.getY() != movedTo.getY()) || (movedFrom.getZ() != movedTo.getZ())) {
                 if ((lastPushed.getOrDefault(p, 0L) + 1500 < System.currentTimeMillis())) {
                     lastPushed.put(p, System.currentTimeMillis());
-                    Vector vec = TrafficRaceGame.getInstance().getMinigameWorld().getLocation("trafficrace_callback").getDirection().normalize();
+                    Vector vec = Gamble.getInstance().getMinigameWorld().getLocation("trafficrace_callback").getDirection().normalize();
                     vec.setY(Math.max(0.4000000059604645D, vec.getY()));
                     p.setVelocity(vec.multiply(2));
 

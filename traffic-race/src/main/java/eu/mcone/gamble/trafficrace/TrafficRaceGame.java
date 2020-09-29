@@ -7,7 +7,6 @@ package eu.mcone.gamble.trafficrace;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
-import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.GambleGame;
 import eu.mcone.gamble.api.player.GamblePlayer;
@@ -31,7 +30,6 @@ public class TrafficRaceGame extends GambleGame {
     @Getter
     public static TrafficRaceGame instance;
 
-    private CoreWorld minigameWorld;
     private GateHelper gateHelper;
     private TrafficState trafficState;
     private LinkedList<GamblePlayer> playersInGoal;
@@ -44,7 +42,7 @@ public class TrafficRaceGame extends GambleGame {
     private int stateChangerTaskId;
 
     public TrafficRaceGame() {
-        super("trafic-race", ChatColor.GREEN, "traficrace.prefix");
+        super("traffic-race", ChatColor.GREEN, "trafficrace.prefix");
         setGameHandler(new GameHandler());
     }
 
@@ -53,7 +51,6 @@ public class TrafficRaceGame extends GambleGame {
         instance = this;
 
         sendConsoleMessage("Initialising traffic race minigame...");
-        minigameWorld = CoreSystem.getInstance().getWorldManager().getWorld("minigames");
         trafficState = TrafficState.GO;
         gateHelper = new GateHelper(this);
         playersInGoal = new LinkedList<>();
