@@ -5,6 +5,7 @@
 
 package eu.mcone.gamble.deathmatch.handler;
 
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.GamePhase;
@@ -21,13 +22,15 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
     public void gamePhaseSwitched(GamePhase gamePhase) {
         switch (gamePhase) {
             case LOBBY:
-                Deathmatch.getInstance().getMessenger().broadcast("§7==================================================");
-                Deathmatch.getInstance().getMessenger().broadcast("");
-                Deathmatch.getInstance().getMessenger().broadcast("§6Versuche Spieler zu töten");
-                Deathmatch.getInstance().getMessenger().broadcast("§6aber versuche nicht selbst");
-                Deathmatch.getInstance().getMessenger().broadcast("§6erschlagen zu werden");
-                Deathmatch.getInstance().getMessenger().broadcast("");
-                Deathmatch.getInstance().getMessenger().broadcast("§7==================================================");
+                Deathmatch.getInstance().getMessenger().broadcastSimple(new SimpleBroadcast(
+                        "§7==================================================" +
+                                "\n" +
+                                "\n§6Versuche Spieler zu töten" +
+                                "\n§6aber versuche nicht selbst" +
+                                "\n§6erschlagen zu werden" +
+                                "\n" +
+                                "\n§7=================================================="
+                ));
 
                 Bukkit.getOnlinePlayers().forEach(x -> x.teleport(Deathmatch.getInstance().getMinigameWorld().getLocation("deathmatch_spawn")));
                 break;
@@ -43,22 +46,34 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
                     x.getInventory().setChestplate(new ItemBuilder(Material.IRON_CHESTPLATE).create());
                     x.getInventory().setHelmet(new ItemBuilder(Material.IRON_HELMET).create());
                 });
-                Deathmatch.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 4 Sekunden!");
+                Deathmatch.getInstance().getMessenger().broadcast(
+                        new SimpleBroadcast("§fDas Spiel beginnt in 4 Sekunden!")
+                );
                 Bukkit.getScheduler().runTaskLater(Deathmatch.getInstance(), () -> {
-                    Deathmatch.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 3 Sekunden!");
+                    Deathmatch.getInstance().getMessenger().broadcast(
+                            new SimpleBroadcast("§fDas Spiel beginnt in 3 Sekunden!")
+                    );
                     Bukkit.getScheduler().runTaskLater(Deathmatch.getInstance(), () -> {
-                        Deathmatch.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in 2 Sekunden!");
+                        Deathmatch.getInstance().getMessenger().broadcast(
+                                new SimpleBroadcast("§fDas Spiel beginnt in 2 Sekunden!")
+                        );
                         Bukkit.getScheduler().runTaskLater(Deathmatch.getInstance(), () -> {
-                            Deathmatch.getInstance().getMessenger().broadcast("§fDas Spiel beginnt in einer Sekunden!");
+                            Deathmatch.getInstance().getMessenger().broadcast(
+                                    new SimpleBroadcast("§fDas Spiel beginnt in einer Sekunden!")
+                            );
                             Bukkit.getScheduler().runTaskLater(Deathmatch.getInstance(), () -> {
                                 for (GamblePlayer all : Gamble.getInstance().getGamblePlayers()) {
                                     Deathmatch.getInstance().getAlivedPlayers().add((Player) all);
-                                    Deathmatch.getInstance().getMessenger().broadcast("§fDas Spiel beginnt...");
+                                    Deathmatch.getInstance().getMessenger().broadcast(
+                                            new SimpleBroadcast("§fDas Spiel beginnt...")
+                                    );
 
                                     Bukkit.getScheduler().runTaskLater(Deathmatch.getInstance(), () -> {
                                         if (Deathmatch.getInstance().getAlivedPlayers().size() != 1) {
                                             ((Player) all).getVelocity().setY(0.6).multiply(0.4);
-                                            Deathmatch.getInstance().getMessenger().broadcast("§fAlle Spieler wurden in die Luft geschossen!");
+                                            Deathmatch.getInstance().getMessenger().broadcast(
+                                                    new SimpleBroadcast("§fAlle Spieler wurden in die Luft geschossen!")
+                                            );
                                         }
                                     }, 100);
                                 }

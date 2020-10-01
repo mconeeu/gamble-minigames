@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gamble.api.minigame.GambleGame;
 import eu.mcone.gamble.api.player.GamblePlayer;
+import eu.mcone.gamble.deathmatch.handler.GameHandler;
 import eu.mcone.gamble.deathmatch.listeners.GenerelPlayerListener;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class Deathmatch extends GambleGame {
 
     public Deathmatch() {
         super("Deathmatch", ChatColor.DARK_RED, "deathmatch.prefix");
-        setGameHandler(new eu.mcone.gamble.deathmatch.handler.GameHandler());
+        setGameHandler(new GameHandler());
 
         minigameWorld = CoreSystem.getInstance().getWorldManager().getWorld("onehit");
 

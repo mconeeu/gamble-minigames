@@ -5,7 +5,7 @@
 
 package eu.mcone.gamble.trafficrace.handler;
 
-import eu.mcone.gamble.api.Gamble;
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.minigame.GamePhase;
 import eu.mcone.gamble.trafficrace.TrafficRaceGame;
 import eu.mcone.gamble.trafficrace.game.TrafficState;
@@ -17,15 +17,17 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
     public void gamePhaseSwitched(GamePhase phase) {
         switch (phase) {
             case LOBBY:
-                TrafficRaceGame.getInstance().getMessenger().broadcast("§7==================================================");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("§6Erreiche die Ziellinie als erster Spieler,");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("§6aber achte darauf stehen zu bleiben, wenn die");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("§6Ampel rot ist.");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("");
-                TrafficRaceGame.getInstance().getMessenger().broadcast("§7==================================================");
+                TrafficRaceGame.getInstance().getMessenger().broadcastSimple(new SimpleBroadcast(
+                        "§7==================================================" +
+                                "\n" +
+                                "\n§6Erreiche die Ziellinie als erster Spieler," +
+                                "\n§6aber achte darauf stehen zu bleiben, wenn die" +
+                                "\n§6Ampel rot ist" +
+                                "\n" +
+                                "\n§7=================================================="
+                ));
 
-                Bukkit.getOnlinePlayers().forEach(x -> x.teleport(Gamble.getInstance().getMinigameWorld().getLocation("trafficrace_spawn")));
+                Bukkit.getOnlinePlayers().forEach(x -> x.teleport(TrafficRaceGame.getInstance().getMinigameWorld().getLocation("trafficrace_spawn")));
                 break;
             case INGAME:
                 TrafficRaceGame.getInstance().getGateHelper().remove();
