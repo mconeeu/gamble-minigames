@@ -1,5 +1,6 @@
 package eu.mcone.gamble.deathmatch.listeners;
 
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.api.minigame.GambleGame;
 import eu.mcone.gamble.api.minigame.GameResult;
@@ -75,7 +76,9 @@ public class GenerelPlayerListener implements Listener {
                         Deathmatch.getInstance().getAlivedPlayers().remove(k);
 
                         Deathmatch.getInstance().getPlayersInGoal().add((GamblePlayer) k);
-                        Deathmatch.getInstance().getMessenger().broadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!");
+                        Deathmatch.getInstance().getMessenger().broadcast(
+                                new SimpleBroadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!")
+                        );
 
                         GameResult[] results = new GameResult[1];
                         Iterator<GamblePlayer> players = Deathmatch.getInstance().getPlayersInGoal().iterator();

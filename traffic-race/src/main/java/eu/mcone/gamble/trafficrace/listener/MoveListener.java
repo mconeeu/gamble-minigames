@@ -5,6 +5,7 @@
 
 package eu.mcone.gamble.trafficrace.listener;
 
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.api.minigame.GameResult;
@@ -57,7 +58,9 @@ public class MoveListener implements Listener {
             player.getPlayer().setGameMode(GameMode.SPECTATOR);
             player.getPlayer().playSound(player.getPlayer().getLocation(), Sound.NOTE_STICKS, 1f, 1f);
             TrafficRaceGame.getInstance().getPlayersInGoal().add(player);
-            TrafficRaceGame.getInstance().getMessenger().broadcast("§6" + player.getPlayer().getName() + " §7hat das Spiel als §f" + TrafficRaceGame.getInstance().getPlayersInGoal().size() + " §7beendet!");
+            TrafficRaceGame.getInstance().getMessenger().broadcast(
+                    new SimpleBroadcast("§6" + player.getPlayer().getName() + " §7hat das Spiel als §f" + TrafficRaceGame.getInstance().getPlayersInGoal().size() + " §7beendet!")
+            );
         }
 
         if (TrafficRaceGame.getInstance().getPlayersInGoal().size() == neededPlayers && !isFinished) {

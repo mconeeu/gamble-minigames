@@ -1,6 +1,7 @@
 package eu.mcone.gamble.onehit.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.api.minigame.GameResult;
 import eu.mcone.gamble.api.player.GamblePlayer;
@@ -84,7 +85,9 @@ public class GeneralPlayerListener implements Listener {
                         OneHit.getInstance().getAlivedPlayers().remove(k);
 
                         OneHit.getInstance().getPlayersInGoal().add((GamblePlayer) k);
-                        OneHit.getInstance().getMessenger().broadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!");
+                        OneHit.getInstance().getMessenger().broadcast(
+                                new SimpleBroadcast("§6" + k.getPlayer().getName() + " §7hat das Spiel überlebt und hat somit gewonnen!")
+                        );
 
                             GameResult[] results = new GameResult[1];
                             Iterator<GamblePlayer> players = OneHit.getInstance().getPlayersInGoal().iterator();
