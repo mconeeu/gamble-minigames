@@ -3,11 +3,11 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.gambe.tntrun;
+package eu.mcone.gamble.tntrun;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
-import eu.mcone.gambe.tntrun.handler.GameHandler;
+import eu.mcone.gamble.tntrun.handler.GameHandler;
 import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.GambleGame;
 import lombok.Getter;

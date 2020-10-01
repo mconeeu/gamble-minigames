@@ -5,11 +5,9 @@
 
 package eu.mcone.gamble.trafficrace.handler;
 
-<<<<<<<<< Temporary merge branch 1
 import eu.mcone.gamble.api.Gamble;
-=========
 import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
->>>>>>>>> Temporary merge branch 2
+import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.GamePhase;
 import eu.mcone.gamble.trafficrace.TrafficRaceGame;
 import eu.mcone.gamble.trafficrace.game.TrafficState;

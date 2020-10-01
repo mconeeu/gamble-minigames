@@ -1,7 +1,7 @@
-package eu.mcone.gambe.tntrun.listener;
+package eu.mcone.gamble.tntrun.listener;
 
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.gambe.tntrun.Tntrun;
+import eu.mcone.gamble.tntrun.Tntrun;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.gameapi.api.player.GamePlayerState;
 import org.bukkit.Bukkit;
@@ -50,13 +50,10 @@ public class GeneralPlayerListener implements Listener {
         Block block = location.getBlock();
 
         if (block.getType().equals(Material.TNT)) {
-            Bukkit.getScheduler().runTaskLaterAsynchronously(Tntrun.getInstance(), new Runnable() {
-                @Override
-                public void run() {
-                    block.setType(Material.AIR);
-                    TNTPrimed primed = location.getWorld().spawn(location, TNTPrimed.class);
-                    primed.setFuseTicks(20);
-                }
+            Bukkit.getScheduler().runTaskLaterAsynchronously(Tntrun.getInstance(), () -> {
+                block.setType(Material.AIR);
+                TNTPrimed primed = location.getWorld().spawn(location, TNTPrimed.class);
+                primed.setFuseTicks(20);
             }, 20);
         }
 

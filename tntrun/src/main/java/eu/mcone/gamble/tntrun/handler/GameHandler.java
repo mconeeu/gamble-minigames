@@ -3,12 +3,13 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.gambe.tntrun.handler;
+package eu.mcone.gamble.tntrun.handler;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.gambe.tntrun.Tntrun;
-import eu.mcone.gambe.tntrun.listener.GeneralPlayerListener;
+import eu.mcone.gamble.tntrun.Tntrun;
+import eu.mcone.gamble.tntrun.listener.GeneralPlayerListener;
 import eu.mcone.gamble.api.minigame.GamePhase;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -22,15 +23,18 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
 
         switch (gamePhase) {
             case LOBBY:
-                Tntrun.getInstance().getMessenger().broadcast("§7==================================================");
-                Tntrun.getInstance().getMessenger().broadcast("");
-                Tntrun.getInstance().getMessenger().broadcast("§6Versuche nicht zu");
-                Tntrun.getInstance().getMessenger().broadcast("§6Sterben den der Boden");
-                Tntrun.getInstance().getMessenger().broadcast("§6fällt unter dir weg!!");
-                Tntrun.getInstance().getMessenger().broadcast("§6Wenn du der Letze lebende");
-                Tntrun.getInstance().getMessenger().broadcast("§6Spieler bist hast du gewonnen!");
-                Tntrun.getInstance().getMessenger().broadcast("");
-                Tntrun.getInstance().getMessenger().broadcast("§7==================================================");
+                Tntrun.getInstance().getMessenger().broadcastSimple(new SimpleBroadcast(
+                        "§7==================================================" +
+                                "\n" +
+                                "\n§6Versuche nicht zu" +
+                                "\n§6Sterben den der Boden" +
+                                "\n§6fällt unter dir weg!!" +
+                                "\n§6Wenn du der Letze lebende" +
+                                "\n§6Spieler bist hast du gewonnen!" +
+                                "\n" +
+                                "\n§7=================================================="
+                ));
+
                 Bukkit.getOnlinePlayers().forEach(x -> {
                     CorePlayer cp = CoreSystem.getInstance().getCorePlayer(x);
                     if (GeneralPlayerListener.isMinigamer(cp)) {
