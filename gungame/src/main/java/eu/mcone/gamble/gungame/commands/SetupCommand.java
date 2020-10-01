@@ -24,7 +24,7 @@ public class SetupCommand extends CorePlayerCommand {
                 CoreSystem.getInstance().getMessenger().sendTransl(player, "system.command.wronguse");
             } else if (args.length == 2 && args[0].equalsIgnoreCase("createlevel")) {
                 try {
-                    int level = Integer.valueOf(args[1]);
+                    int level = Integer.parseInt(args[1]);
                     Inventory inv = player.getInventory();
                     Map<Integer, ItemStack> items = new HashMap<>();
                     for (int i = 0; i < inv.getSize(); i++) {

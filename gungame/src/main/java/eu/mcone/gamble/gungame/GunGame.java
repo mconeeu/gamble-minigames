@@ -14,7 +14,7 @@ import eu.mcone.gamble.api.player.GamblePlayer;
 import eu.mcone.gamble.gungame.commands.SetupCommand;
 import eu.mcone.gamble.gungame.game.GungameLevel;
 import eu.mcone.gamble.gungame.handler.GameHandler;
-import eu.mcone.gamble.gungame.listeners.GeneralPlayerListener;
+import eu.mcone.gamble.gungame.listener.GeneralPlayerListener;
 import lombok.Getter;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bukkit.ChatColor;
@@ -60,11 +60,12 @@ public class GunGame extends GambleGame {
         ).find()) {
             gungameLevels.put(level.getLevel(), level);
         }
-        registerCommands(
-                new SetupCommand()
-        );
         registerListener(
                 new GeneralPlayerListener()
+        );
+        System.out.println("register command");
+        registerCommands(
+                new SetupCommand()
         );
 
 

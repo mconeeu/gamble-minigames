@@ -5,7 +5,11 @@
 
 package eu.mcone.gamble.trafficrace.handler;
 
+<<<<<<<<< Temporary merge branch 1
+import eu.mcone.gamble.api.Gamble;
+=========
 import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
+>>>>>>>>> Temporary merge branch 2
 import eu.mcone.gamble.api.minigame.GamePhase;
 import eu.mcone.gamble.trafficrace.TrafficRaceGame;
 import eu.mcone.gamble.trafficrace.game.TrafficState;
@@ -27,7 +31,7 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
                                 "\n§7=================================================="
                 ));
 
-                Bukkit.getOnlinePlayers().forEach(x -> x.teleport(TrafficRaceGame.getInstance().getMinigameWorld().getLocation("trafficrace_spawn")));
+                Bukkit.getOnlinePlayers().forEach(x -> x.teleport(Gamble.getInstance().getMinigameWorld().getLocation("trafficrace_spawn")));
                 break;
             case INGAME:
                 TrafficRaceGame.getInstance().getGateHelper().remove();
