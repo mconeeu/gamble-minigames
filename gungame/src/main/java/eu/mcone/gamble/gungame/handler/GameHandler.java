@@ -5,9 +5,10 @@
 
 package eu.mcone.gamble.gungame.handler;
 
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.minigame.GamePhase;
 import eu.mcone.gamble.gungame.GunGame;
-import eu.mcone.gamble.gungame.listeners.GeneralPlayerListener;
+import eu.mcone.gamble.gungame.listener.GeneralPlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -25,26 +26,27 @@ public class GameHandler extends eu.mcone.gamble.api.minigame.GameHandler {
     public void gamePhaseSwitched(GamePhase gamePhase) {
         switch (gamePhase) {
             case LOBBY:
-                GunGame.getInstance().getMessenger().broadcast("§7==================================================");
-                GunGame.getInstance().getMessenger().broadcast("");
-                GunGame.getInstance().getMessenger().broadcast("§6Versuche Spieler zu töten");
-                GunGame.getInstance().getMessenger().broadcast("§6aber versuche nicht selbst");
-                GunGame.getInstance().getMessenger().broadcast("§6erschlagen zu werden");
-                GunGame.getInstance().getMessenger().broadcast("§6Du erhällst durch jeden Kill");
-                GunGame.getInstance().getMessenger().broadcast("§6ein neues Item!");
-                GunGame.getInstance().getMessenger().broadcast("");
-                GunGame.getInstance().getMessenger().broadcast("§7==================================================");
-                Bukkit.getOnlinePlayers().forEach(x -> {
-                    x.setGameMode(GameMode.ADVENTURE);
-                });
+                GunGame.getInstance().getMessenger().broadcastSimple(new SimpleBroadcast(
+                        "§7==================================================" +
+                                "\n" +
+                                "\n§6Versuche Spieler zu töten" +
+                                "\n§6aber versuche nicht selbst" +
+                                "\n§6erschlagen zu werden" +
+                                "\n§6Du erhällst durch jeden Kill" +
+                                "\n§6ein neues Item!" +
+                                "\n" +
+                                "\n§7=================================================="
+                ));
+
+                Bukkit.getOnlinePlayers().forEach(p -> p.setGameMode(GameMode.ADVENTURE));
                 break;
             case INGAME:
-                Bukkit.getOnlinePlayers().forEach(x -> {
-                    x.getInventory().clear();
-                    x.getPlayer().teleport(getRandomSpawn());
-                    x.getPlayer().setGameMode(GameMode.ADVENTURE);
-                    GunGame.getInstance().getAlivedPlayers().add(x.getPlayer());
-                    GeneralPlayerListener.setItemsLevel(x, GunGame.getInstance().getGungameLevels().get(0));
+                Bukkit.getOnlinePlayers().forEach(p -> {
+                    p.getInventory().clear();
+                    p.getPlayer().teleport(getRandomSpawn());
+                    p.getPlayer().setGameMode(GameMode.ADVENTURE);
+                    GunGame.getInstance().getAlivedPlayers().add(p.getPlayer());
+                    GeneralPlayerListener.setItemsLevel(p, GunGame.getInstance().getGungameLevels().get(0));
                 });
                 hasStarted = true;
                 break;
