@@ -1,5 +1,6 @@
 package eu.mcone.gamble.race.listener;
 
+import eu.mcone.coresystem.api.bukkit.broadcast.SimpleBroadcast;
 import eu.mcone.gamble.api.Gamble;
 import eu.mcone.gamble.api.minigame.EndReason;
 import eu.mcone.gamble.api.minigame.GameResult;
@@ -44,7 +45,9 @@ public class MoveListener implements Listener {
             player.getPlayer().setGameMode(GameMode.SPECTATOR);
             player.getPlayer().playSound(player.getPlayer().getLocation(), Sound.NOTE_STICKS, 1f, 1f);
             Race.getInstance().getPlayersInGoal().add(player);
-            Race.getInstance().getMessenger().broadcast("§6" + player.getPlayer().getName() + " §7hat das Spiel als §f" + Race.getInstance().getPlayersInGoal().size() + " §7beendet!");
+            Race.getInstance().getMessenger().broadcast(
+                    new SimpleBroadcast("§6" + player.getPlayer().getName() + " §7hat das Spiel als §f" + Race.getInstance().getPlayersInGoal().size() + " §7beendet!")
+            );
         }
 
         if (Race.getInstance().getPlayersInGoal().size() == neededPlayers && !isFinished) {
