@@ -66,13 +66,12 @@
         <url>https://www.eu.mcone.eu</url>
     </organization>
 
-    <distributionManagement>
+    <repositories>
         <repository>
-            <id>mcone-systems</id>
-            <name>MC ONE Repo</name>
-            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/mconeeu/artifacts</url>
         </repository>
-    </distributionManagement>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -90,13 +89,13 @@
         <dependency> <!-- MCONE GameApi (This includes the api module) -->
             <groupId>eu.mcone.gameapi</groupId>
             <artifactId>api</artifactId>
-            <version>4.1.1-SNAPSHOT</version>
+            <version>4.1.5-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.9.1-SNAPSHOT</version>
+            <version>10.10.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
